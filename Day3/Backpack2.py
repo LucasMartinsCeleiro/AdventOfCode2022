@@ -1,25 +1,29 @@
 backpack = "F:\Python\PROJECT\AdventOfCode2022\Day3\input.txt"
 totalvalue = 0
-group = []
 cpt = 0
+group = []
 
-#cut the string in two egal size
 with open(backpack) as file :
     
     for line in file :
-        while cpt != 3:
-            group.append(line)
-            for char in line :
-                if char == '\n':
-                    cpt +=1
-                    print(cpt)
-  
-    cpt = 0
-    commonCharGroup = set.intersection(*map(set,group))
-    if commonCharGroup.isupper () :
-        totalvalue += ord(commonCharGroup)-38
-    else :
-        totalvalue += ord(commonCharGroup)-96
-              
+        group.append(line.strip())
+        cpt +=1
+        #When 3 string add points
+        if cpt % 3 == 0:
+            #isolating the common char
+            group = [set(line) for line in group]
+            commonCharGroup = set.intersection(*group)
+            #Totalpoint calculus
+            for element in commonCharGroup :
+                #Check if the character is upper or lower case
+                if element.isupper() :
+                    totalvalue += ord(element)-38
+                elif element.islower():
+                    totalvalue += ord(element)-96
+            #Clear the group for the next iteration
+            group.clear()
+                
     #Print output
     print(totalvalue)
+
+
