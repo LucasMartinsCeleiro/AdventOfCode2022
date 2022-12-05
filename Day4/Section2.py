@@ -24,11 +24,11 @@ with open(sections) as file :
         # Vérification du nombre d'éléments dans les listes
         if len(values1) <= len(values2):
             # Utilisation de in et all() pour vérifier si tous les éléments de list1 sont présents dans list2
-            result = all(x in values2 for x in values1)
+            result = any(x in values2 for x in values1)
             if result == True :
                 cpt+=1
         else :
-            result = all(x in values1 for x in values2)
+            result = any(x in values1 for x in values2)
             if result == True :
                 cpt+=1
     print (cpt)
